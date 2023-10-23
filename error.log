@@ -1,0 +1,12 @@
+20/10/2023 14:36:55 = PDOException: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\pages\login.php(29): MySQL::conectar()
+#2 C:\xampp\htdocs\site_priscila\index.php(54): include('C:\\xampp\\htdocs...')
+#3 {main}
+20/10/2023 15:49:02 = PDOException: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\pages\login.php(29): MySQL::conectar()
+#2 C:\xampp\htdocs\site_priscila\index.php(55): include('C:\\xampp\\htdocs...')
+#3 {main}

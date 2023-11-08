@@ -12,6 +12,7 @@ html,body{
     overflow-x: hidden;
 }
 .center{
+width:100%;
     margin: 0 auto;
     max-width:1280px ;
 }
@@ -128,46 +129,24 @@ section .container > .box-descricao ul {
     list-style-type: none;
 }
 
+/****** PAGINA 404 ******/
 
-
-/***** LOGIN/CADASTRO  ****/
-section .box-login{
-    box-shadow: 10px 10px 5px rgba(0, 0, 0,0.4);
-    max-width: 700px;
-    width: 100%;
-    background-color: #F7ACB0;
-    padding: 10px;
-    text-align: center;
-    margin: 30px 0;
+.container-erro{
+    margin: 35px auto 70px auto ;
+    width: 500px;
     position: relative;
-    left: 50%;
-    transform: translate(-50%);
-    border-radius: 10px;
 }
-section .box-login .form-group{
-    margin: 10px 0;
-}
-section .box-login input[type="text"],input[type="email"], input[type="password"]{
-    width: 80%;
-    border: 0;
-    border-radius: 10px;
-    padding: 10px;
-}
-section .box-login input[type="submit"]{
-    width: 120px;
-    padding: 5px 3px;
-    border: 0;
-    font-size: 18px;
-    border-radius: 10px;
-    background-color: #863E3F;
-    color: white;
-    cursor: pointer;
-}
-section .box-login h3{
-    font-size: 22px;
-    color: white;
+.container-erro h1{
+    color: #333;
+    font-size: 38px;
     font-weight: lighter;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 2px solid #333;
 }
+
+
+
 
 /****** PAGINA PRODUTO ******/
 

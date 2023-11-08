@@ -32,14 +32,14 @@
                 </div> 
                 <div class="box-conta w50 left">
                     
-                    <h4><a href="<?php echo INCLUDE_PATH;?>main"><i class="fa fa-user"> Minha conta</i></a></h4>
+                    <h4><a href="<?php echo INCLUDE_PATH_PERFIL;?>"><i class="fa fa-user"> Minha conta</i></a></h4>
                     
                     <h4><a href="<?php echo INCLUDE_PATH?>carrinho"><i class="fa fa-shopping-cart"> Carrinho</i></a></h4>
                 </div>
 
                 <div class="box-conta-mobile right">
                     <div class="botao-menu-mobile"><i class="fa fa-bars"></i></div>
-                    <h4><a href="<?php echo INCLUDE_PATH?>login"><i class="fa fa-user"> Minha conta</i></a></h4>
+                    <h4><a href="<?php echo INCLUDE_PATH_PERFIL?>"><i class="fa fa-user"> Minha conta</i></a></h4>
 
                     <h4><a href="<?php echo INCLUDE_PATH?>carrinho"><i class="fa fa-shopping-cart"> Carrinho</i></a></h4>
                 </div>
@@ -77,9 +77,7 @@
         
     </footer>
     <script src="<?php echo INCLUDE_PATH?>js/jquery.js"></script>
-    
     <script src="<?php echo INCLUDE_PATH?>js/scripts.js"></script>
     
-    <?php Painel::loadJS(['sidebar.js'],'Perfil');?>
 </body>
 </html>

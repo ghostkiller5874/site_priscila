@@ -9,7 +9,7 @@ spl_autoload_register($autoload);
 
 //redirecinamento
 define('INCLUDE_PATH', 'http://localhost/site_priscila/');
-define('INCLUDE_PATH_PAINEL', INCLUDE_PATH . 'painel/');
+define('INCLUDE_PATH_PERFIL', INCLUDE_PATH . 'User/');
 
 
 //Banco de Dados

@@ -464,6 +464,16 @@ section.box-content form {
   border: 1px solid #ccc;
   padding-left: 8px;
 }
+.box-content form .form-group select{
+  width: 90%;
+  border-radius: 10px;
+  padding: 8px ;
+  text-align: center;
+  font-size: 17px;
+}
+.box-content form .form-group select option{
+  font-size: 17px;
+}
 
 .box-content form .form-group input[type=submit] {
   padding: 8px;

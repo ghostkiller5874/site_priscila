@@ -13,33 +13,40 @@
 
     <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo INCLUDE_PATH_PERFIL; ?>css/style.css" type="text/css">
-
-
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="icon" href="<?php echo INCLUDE_PATH?>favicon.ico" type="image/x-icon">
 
 
     <title>Area de Peril</title>
 </head>
 
 <body>
+    
+    <base base="<?php echo INCLUDE_PATH_PERFIL; ?>" />
     <!--O HEADER-->
     <div class="wrapper">
 
         <div class="top_navbar">
+
             <div class="logo">
-                <a href="<?php echo INCLUDE_PATH ?>"><img src="<?php echo INCLUDE_PATH?>images/logo2.png" title="Home"></a>
+                <a href="<?php echo INCLUDE_PATH ?>"><img src="<?php echo INCLUDE_PATH ?>images/logo2.png" title="Home"></a>
             </div>
             <div class="top_menu">
                 <div class="home_link">
-                    <a href="<?php echo INCLUDE_PATH_PERFIL?>">
-                        <span class="icon"><i class="fas fa-home"></i></span>
+                    <a class="hamburger"><i class="fa fa-bars"></i></a>
+                    <a href="<?php echo INCLUDE_PATH_PERFIL ?>" class="Home">
+                        <span class="icon"><i class="fa fa-home"></i></span>
                         <span>Home</span>
                     </a>
                 </div>
                 <div class="right_info">
                     <div class="icon_wrap">
                         <div class="icon">
-                            <a href="<?php echo INCLUDE_PATH_PERFIL ?>?logout"><i class="fas fa-power-off desliga"></i></a>
+                            <a href="<?php echo INCLUDE_PATH ?>carrinho"><i class="fa fa-shopping-cart"></i> Carrinho</a>
+                        </div>
+                    </div>
+                    <div class="icon_wrap">
+                        <div class="icon">
+                            <a href="<?php echo INCLUDE_PATH_PERFIL ?>?logout"><i class="fa fa-power-off desliga"></i></a>
                         </div>
                     </div>
                 </div>
@@ -53,44 +60,22 @@
 
                     <ul>
                         <li>
-                            <a href="#">
-                                <span class="icon">
-                                    <i class="fas fa-border-all"></i></span>
-                                <span class="list">Dashboard</span>
-                            </a>
+                            <h4 <?php verificaPermissaoMenu(0)?>>Categorias</h4>
+                            <a <?php selecionadoMenu('cadastrar-categoria')?><?php verificaPermissaoMenu(0)?> href="<?php echo INCLUDE_PATH_PERFIL ?>cadastrar-categoria">Cadastrar Categorias</a>
+                            <a <?php selecionadoMenu('gerenciar-categoria')?><?php verificaPermissaoMenu(0)?> href="<?php echo INCLUDE_PATH_PERFIL ?>gerenciar-categoria">Gerenciar Categorias</a>
                         </li>
                         <li>
-                            <a href="#" class="active">
-                                <span class="icon"><i class="fas fa-chart-pie"></i></span>
-                                <span class="list">Charts</span>
-                            </a>
+                            <h4>Clientes</h4>
+                            <a <?php selecionadoMenu('cadastrar-clientes')?> href="<?php echo INCLUDE_PATH_PERFIL ?>cadastrar-clientes">Cadastrar Clientes</a>
+                            
                         </li>
                         <li>
-                            <a href="#">
-                                <span class="icon"><i class="fas fa-address-book"></i></span>
-                                <span class="list">Contact</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="icon"><i class="fas fa-address-card"></i></span>
-                                <span class="list">About</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="icon"><i class="fab fa-blogger"></i></span>
-                                <span class="list">Blogs</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="icon"><i class="fas fa-map-marked-alt"></i></span>
-                                <span class="list">Maps</span>
-                            </a>
+                            <h4 <?php verificaPermissaoMenu(0)?>>Produtos</h4>
+                            <a <?php verificaPermissaoMenu(0)?> href="<?php echo INCLUDE_PATH_PERFIL?>cadastrar-produtos" <?php selecionadoMenu('cadastrar-produtos')?>>Cadastrar Produtos</a>
+                            <a <?php verificaPermissaoMenu(0)?> href="<?php echo INCLUDE_PATH_PERFIL?>gerenciar-produtos" <?php selecionadoMenu('gerenciar-produtos')?>>Gestão de Produtos</a>
                         </li>
                     </ul>
-
+                    <!--
                     <div class="hamburger">
                         <div class="inner_hamburger">
                             <span class="arrow">
@@ -98,7 +83,7 @@
                                 <i class="fas fa-long-arrow-alt-right"></i>
                             </span>
                         </div>
-                    </div>
+                    </div>-->
 
                 </div>
             </div>
@@ -106,14 +91,21 @@
             <!--CONTEUDO-->
             <div class="container">
                 <!-- paginas do perfil -->
-                <?php include('pages/teste.php');?>
+                <?php
+                    Painel::carregarPagina();
+                ?>
             </div>
 
         </div>
     </div>
     <script src="<?php echo INCLUDE_PATH ?>js/jquery.js"></script>
     <script src="<?php echo INCLUDE_PATH_PERFIL ?>js/sidebar.js"></script>
-    
+    <script src="<?php echo INCLUDE_PATH ?>js/constants.js"></script>
+    <script src="<?php echo INCLUDE_PATH_PERFIL ?>js/ajax.js"></script>
+    <script src="<?php echo INCLUDE_PATH_PERFIL ?>js/main.js"></script>
+    <script src="<?php echo INCLUDE_PATH_PERFIL?>js/jquery.maskMoney.js"></script>
+    <script src="<?php echo INCLUDE_PATH_PERFIL?>js/controleFinanceiro.js"></script>
+
 
 </body>
 

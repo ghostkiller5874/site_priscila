@@ -3,4 +3,3 @@ $(document).ready(function(){
       $(".wrapper").toggleClass("active")
     })
 });
-console.log("chamando sidebar");

@@ -33,8 +33,14 @@
                 <div class="box-conta w50 left">
                     
                     <h4><a href="<?php echo INCLUDE_PATH_PERFIL;?>"><i class="fa fa-user"> Minha conta</i></a></h4>
-                    
+                    <?php
+                        $i=0;
+                     if($i == 0){
+                        ?>
                     <h4><a href="<?php echo INCLUDE_PATH?>carrinho"><i class="fa fa-shopping-cart"> Carrinho</i></a></h4>
+                    <?php } else{?>
+                        <h4><a href="<?php echo INCLUDE_PATH?>carrinho"><i class="fa fa-shopping-cart"> Carrinho (<?php echo $i;?>)</i></a></h4>
+                    <?php }?>
                 </div>
 
                 <div class="box-conta-mobile right">
@@ -52,11 +58,12 @@
         if(file_exists('pages/'.$url.'.php') ){
             include('pages/'.$url.'.php');
         }else{
+            $pagina404 = true;
             include('pages/404.php');
         }
     ?>
     
-    <footer>
+    <footer <?php if(isset($pagina404) && $pagina404 == true) echo 'class="fixed"'; ?>>
         <div class="center">
             <div class="container-footer">
                 <div class="footer-logo w50 left">

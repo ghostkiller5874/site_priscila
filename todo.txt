@@ -1,6 +1,7 @@
 realizar alterações na pagina de perfil,
 resposividade do perfil,
 acrescentar mais areas do usuario,
-base de dados da pagina de cadastrar e a pagina em si,
 e começar a fazer a base de dados de acordo com o perfil e o projeto,
-na tabela usuario sera mantido apenas dados para logar, deve ser criado outra tabela para o usuario normal,
+na tabela usuario sera mantido apenas dados para logar, deve ser criado outra pagina "home" para o usuario normal,
+fazer um " if " para separar a " home " do ADM e do Usuario.
+checar o bug do "excluir" no gerenciar categoria(metodo sera padrao para os demais)

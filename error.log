@@ -10,3 +10,27 @@ Stack trace:
 #1 C:\xampp\htdocs\site_priscila\pages\login.php(29): MySQL::conectar()
 #2 C:\xampp\htdocs\site_priscila\index.php(55): include('C:\\xampp\\htdocs...')
 #3 {main}
+13/11/2023 18:48:48 = PDOException: SQLSTATE[HY000] [1049] Unknown database 'projeto_tcc' in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\pages\carrinho.php(33): MySQL::conectar()
+#2 C:\xampp\htdocs\site_priscila\index.php(59): include('C:\\xampp\\htdocs...')
+#3 {main}
+13/11/2023 18:48:52 = PDOException: SQLSTATE[HY000] [1049] Unknown database 'projeto_tcc' in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\pages\carrinho.php(33): MySQL::conectar()
+#2 C:\xampp\htdocs\site_priscila\index.php(59): include('C:\\xampp\\htdocs...')
+#3 {main}
+13/11/2023 18:48:54 = PDOException: SQLSTATE[HY000] [1049] Unknown database 'projeto_tcc' in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\pages\carrinho.php(33): MySQL::conectar()
+#2 C:\xampp\htdocs\site_priscila\index.php(59): include('C:\\xampp\\htdocs...')
+#3 {main}
+13/11/2023 18:48:58 = PDOException: SQLSTATE[HY000] [1049] Unknown database 'projeto_tcc' in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\pages\carrinho.php(33): MySQL::conectar()
+#2 C:\xampp\htdocs\site_priscila\index.php(59): include('C:\\xampp\\htdocs...')
+#3 {main}

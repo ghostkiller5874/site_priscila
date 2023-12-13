@@ -1,5 +1,24 @@
 <?php  include('config.php');?>
+<?php Site::updateUsuarioOnline();?>
+<?php Site::contador();?>
 
+<?php 
+    $sql = MySql::conectar()->prepare("SELECT * FROM `tb_usuario`");
+    $sql->execute();
+    $sql = $sql->fetch();
+
+    $_SESSION['identifica'] = $sql['user_id'];
+?>
+<?php
+ $carrinho = MySql::conectar()->prepare("SELECT `quantidade` FROM `tb_carrinho` WHERE user_id=$_SESSION[identifica]");
+ $carrinho->execute();
+ $carrinho = $carrinho->fetchAll();
+ $amount = 0;
+ 
+ for($i=0;$i <= count($carrinho);$i++){
+    $amount+=$i;
+ }
+ ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -22,7 +41,7 @@
     <?php   
         $url = isset($_GET['url']) ? $_GET['url'] : 'home';
     ?>
-    
+    <bases bases="<?php echo INCLUDE_PATH; ?>" />
     <header>
         <div class="center">
             <div class="box-header">
@@ -33,22 +52,19 @@
                 <div class="box-conta w50 left">
                     
                     <h4><a href="<?php echo INCLUDE_PATH_PERFIL;?>"><i class="fa fa-user"> Minha conta</i></a></h4>
-                    <?php
-                        $i=0;
-                     if($i == 0){
-                        ?>
-                    <h4><a href="<?php echo INCLUDE_PATH?>carrinho"><i class="fa fa-shopping-cart"> Carrinho</i></a></h4>
-                    <?php } else{?>
-                        <h4><a href="<?php echo INCLUDE_PATH?>carrinho"><i class="fa fa-shopping-cart"> Carrinho (<?php echo $i;?>)</i></a></h4>
-                    <?php }?>
+                    
+                    <h4><a href="<?php echo INCLUDE_PATH?>carrinho"><i class="fa fa-shopping-cart"> Carrinho <?php echo ($amount <= 0)? ' ' : '('.$amount.')';?></i></a></h4>
+                    
                 </div>
 
                 <div class="box-conta-mobile right">
                     <div class="botao-menu-mobile"><i class="fa fa-bars"></i></div>
-                    <h4><a href="<?php echo INCLUDE_PATH_PERFIL?>"><i class="fa fa-user"> Minha conta</i></a></h4>
-
-                    <h4><a href="<?php echo INCLUDE_PATH?>carrinho"><i class="fa fa-shopping-cart"> Carrinho</i></a></h4>
+                    <ul>
+                        <li><h4><a href="<?php echo INCLUDE_PATH_PERFIL?>"><i class="fa fa-user"> Minha conta</i></a></h4></li>
+                        <li><h4><a href="<?php echo INCLUDE_PATH?>carrinho"><i class="fa fa-shopping-cart"> Carrinho <?php echo ($amount <= 0)? ' ' : '('.$amount.')';?></i></a></h4></li>
+                    </ul>   
                 </div>
+                
                 <div class="clear"></div>
             </div>
         </div>
@@ -84,7 +100,9 @@
         
     </footer>
     <script src="<?php echo INCLUDE_PATH?>js/jquery.js"></script>
+    <script src="<?php echo INCLUDE_PATH?>js/constants.js"></script>
+    <script src="<?php echo INCLUDE_PATH?>js/jquery.ajaxform.js"></script>
     <script src="<?php echo INCLUDE_PATH?>js/scripts.js"></script>
-    
+    <script src="<?php echo INCLUDE_PATH_PERFIL?>js/main.js"></script>
 </body>
 </html>

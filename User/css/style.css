@@ -336,8 +336,8 @@ body {
 }
 
 .wrapper.active .main_body .container {
-  width: calc(100% - 100px);
-  margin-left: 100px;
+  width: 100%;
+  margin-left: 10px;
 }
 
 
@@ -466,7 +466,6 @@ section.box-content form {
 }
 .box-content form .form-group select{
   width: 90%;
-  border-radius: 10px;
   padding: 8px ;
   text-align: center;
   font-size: 17px;
@@ -528,4 +527,227 @@ a.btn.edit{background: #F4B03E;}
 a.btn.delete{background: #E05C4E;}
 a.btn.order{background: #0091ea;}
 
-/****** CADASTRO DO CLIENTE *******/
+/****** GESTÃO DE PRODUTOS *******/
+.boxes{
+  display: flex;
+  flex-wrap: wrap;
+}
+.box-single-wrapper{
+  padding: 20px;
+}
+.box-single{
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  min-height: 200px;
+  border-radius: 5px;
+}
+.topo-box{
+  text-align: center;
+  color: #ccc;
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+}
+.topo-box img{
+  text-align: center;
+  margin: 0 auto;
+  max-width: 150px;
+  max-height: 100px;
+  border-radius: 5px;
+}
+.topo-box h2{
+  font-size: 18px;
+}
+.body-box{
+  padding: 10px;
+}
+.body-box p{
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.body-box .group-btn a{
+  color: white;
+  padding: 5px;
+  margin: 8px 5px;
+  float: right;
+}
+
+.busca{
+  width: 100%;
+  background-color: #BE7578;
+  padding: 10px;
+}
+.busca h4{
+  color: white;
+  font-weight: 300;
+  font-size: 18px;
+}
+.busca input[type=text]{
+  margin-top: 0 !important;
+}
+
+
+/*****HOME USUARIO******/
+section.box-content .pedido-box{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.pedido-wrapper{
+  border:1px solid #af5052;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+.pedido-single{
+  text-align: center;
+  margin: 0 auto;
+}
+.pedido-single img{
+  width: 100%;
+  max-width: 150px;
+  max-height: 80px;
+  border-radius: 8px;
+}
+.pedido-single ul{
+  text-align: left;
+}
+.pedido-single li{
+  list-style-type: none;
+}
+.pedido-single h4{
+  display: inline-block;
+  padding-left: 5px;
+}
+.top_menu_mobile{
+  display: none;
+}
+.menu_mobile ul{
+  display: none;
+}
+.img_mobile{
+  display: none;
+}
+@media screen and (max-width: 768px) {
+    .wrapper .top_navbar .logo{
+    display: none;
+  }
+  .wrapper .top_navbar .top_menu{
+    display: none;
+  }
+
+  /*MENU MOBILE*/
+  .wrapper .top_navbar .top_menu_mobile{
+    width: 100%;
+    background-color: white;
+    display: inline;
+  }
+  .home_link_mobile{
+    float: left;
+    margin: 20px;
+  }
+  .home_link_mobile a{
+    font-size: 22px;
+  }
+
+  .menu_mobile{
+    position: relative;
+    z-index: 20000;
+  }
+  .menu_mobile .botao-menu{
+    font-size: 22px;
+    margin: 20px;
+  }
+  .menu_mobile ul{
+    text-align: center;
+    float: right;
+    width: 30%;
+    background-color: #BE7578;
+    color: white;
+    position: absolute;
+    top: 65px;
+    left: 70%;
+  }
+  .menu_mobile li{
+    list-style-type: none;
+    margin-top: 10px;
+    padding: 10px 0;
+    border-bottom:1px solid white;
+  }
+  
+  .menu_mobile a{
+    font-size: 18px;
+  }
+
+  .img_mobile{
+    display: block;
+    transition: all 0.3s linear;
+  }
+  .img_mobile img{
+    width: 100px;
+    height: 40px;
+    margin: 20px 0;
+    border-radius: 20px;
+    position: absolute;
+    top: -10px;
+    left: 70px;
+  }
+  .wrapper.active img{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  /*box metricas - ADM home*/
+  .box-content .box-metricas{
+    display: block;
+  }
+  .box-content .box-metrica-single{
+    width: 100%;
+    float: none;
+    display: inline-block;
+  }
+
+  /*pedido-box - ADM home*/
+  section.box-content .pedido-box{
+    display: block;
+  }
+  .pedido-wrapper{
+    width: 100%;
+    margin: 10px 0 !important;
+  }
+  .pedido-single ul li i{
+    display: none;
+  }
+  /*menu mobile painel*/
+  .menu_mobile ul{
+    text-align: center;
+    float: right;
+    width: 40%;
+    background-color: #BE7578;
+    color: white;
+    position: absolute;
+    top: 65px;
+    left: 60%;
+  }
+  
+}
+@media screen and (max-width:650px) {
+  /*gestao de produtos - ADM*/
+  .busca form input[type=text]{
+    width: 100% !important;
+  }
+  .busca form input[type=submit]{  
+    display: block;  
+    float: right;
+    margin-top: 5px;
+  }
+  .boxes{
+    display: block;
+  }
+  .box-single-wrapper{
+    width: 100%;
+    margin: 10px 0;
+  }
+}

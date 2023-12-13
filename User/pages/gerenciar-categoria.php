@@ -1,7 +1,7 @@
 <?php verificaPermissaoPagina(0) ?>
 <?php
 
-$sql = MySQL::conectar()->prepare("SELECT * FROM `tb_categoria`");
+$sql = MySql::conectar()->prepare("SELECT * FROM `tb_categoria`");
 $sql->execute();
 $categoria = $sql->fetchAll();
 
@@ -9,19 +9,24 @@ $categoria = $sql->fetchAll();
 <section class="box-content">
     <h2><i class="fa fa-id-card-o"></i> Categorias Cadastradas</h2>
     <div class="wraper-table">
+
         <table>
             <?php
-                if (isset($_GET['excluir'])) {
-                    $idExcluir = (int)$_GET['excluir'];
-                    $sql=MySQL::conectar()->prepare("SELECT imagem FROM `tb_categoria` WHERE id=$idExcluir");
-                    $sql->execute();
-                    @$imagem = $sql->fetch()['imagem'];
-                
-                    @unlink('uploads/'.$imagem);
-                    
-                    MySQL::conectar()->exec("DELETE FROM `tb_categoria` WHERE id=$idExcluir");
-                    Painel::alert('sucesso','A categoria foi deletada com sucesso');
-                }
+            if (isset($_GET['excluir'])) {
+                $idExcluir = (int)$_GET['excluir'];
+                $sql = MySql::conectar()->prepare("SELECT imagem FROM `tb_categoria` WHERE id=$idExcluir");
+                $sql->execute();
+                @$imagem = $sql->fetch()['imagem'];
+
+                @unlink('uploads/' . $imagem);
+
+                MySql::conectar()->exec("DELETE FROM `tb_categoria` WHERE id=$idExcluir");
+                Painel::alert('sucesso', 'A categoria foi deletada com sucesso');
+            }
+            $sql = MySql::conectar()->prepare("SELECT * FROM `tb_categoria`");
+            $sql->execute();
+            $categoria = $sql->fetchAll();
+
             ?>
             <tbody>
                 <tr>
@@ -32,9 +37,9 @@ $categoria = $sql->fetchAll();
 
                 </tr>
                 <?php
-                    
+
                 foreach ($categoria as $key => $value) {
-                     
+
                 ?>
                     <tr>
                         <td><?php echo $value['nome']; ?></td>

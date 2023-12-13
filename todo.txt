@@ -1,7 +1,20 @@
-realizar alterações na pagina de perfil,
-resposividade do perfil,
-acrescentar mais areas do usuario,
-e começar a fazer a base de dados de acordo com o perfil e o projeto,
-na tabela usuario sera mantido apenas dados para logar, deve ser criado outra pagina "home" para o usuario normal,
-fazer um " if " para separar a " home " do ADM e do Usuario.
-checar o bug do "excluir" no gerenciar categoria(metodo sera padrao para os demais)
+responsivo do painel - feito
+mostrar visitantes - feito
+menu-botao na parte de logar - feito
+menu responsivo - feito
+resposividade do perfil - feito,
+fazer o slider para as categorias, - feito
+abater no estoque a quantidade selecionada - feito
+realizar alterações na pagina de perfil - feito,
+acrescentar mais areas do usuario - feito,
+e começar a fazer a base de dados de acordo com o perfil e o projeto - feito,
+na tabela usuario sera mantido apenas dados para logar, deve ser criado outra pagina "home" para o usuario normal - feito,
+fazer um " if " para separar a " home " do ADM e do Usuario - feito.
+checar o bug do "excluir" no gerenciar categoria(metodo sera padrao para os demais) - feito
+consertar o erro na "home" relacionado a 'categoria' - feito
+puxar o produto pro carrinho e finalizar compra - feito
+mostrar o item comprado no painel - feito
+tirar o item do carrinho - feito
+
+
+fazer o teste de mais de um item no carrinho - a fazer(nao foi possivel resolver)

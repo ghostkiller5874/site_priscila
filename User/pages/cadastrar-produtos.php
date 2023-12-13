@@ -1,69 +1,49 @@
-<?php 
-    verificaPermissaoPagina(0);
+<?php
+verificaPermissaoPagina(0);
 ?>
-<?php 
-    $sql = MySQL::conectar()->prepare("SELECT * FROM `tb_categoria`");
-    $sql->execute();
-    $categoria = $sql->fetchAll();
+<?php
+$sql = MySql::conectar()->prepare("SELECT * FROM `tb_categoria`");
+$sql->execute();
+$categoria = $sql->fetchAll();
+
+$cor = MySql::conectar()->prepare("SELECT * FROM `tb_cor`");
+$cor->execute();
+$cor = $cor->fetchAll();
 ?>
 <section class="box-content">
     <h2><i class="fa fa-pencil"></i> Adicione um produto: </h2>
     <form method="post" enctype="multipart/form-data">
-        <?php 
-            if(isset($_POST['acao'])){
-                $nome = $_POST['nome'];
-                $descricao = $_POST['descricao'];
-                $largura = $_POST['largura'];
-                $altura = $_POST['altura'];
-                $comprimento = $_POST['comprimento'];
-                $peso = $_POST['peso'];
-                $quantidade = $_POST['quantidade'];
-                $preco = Painel::formatarMoedaBd($_POST['preco']);
-                $imagens = array();
-                $amountFiles = count($_FILES['imagem']['name']);
+        
+        <?php
+        if (isset($_POST['acao'])) {
+            $nome = $_POST['nome'];
+            $descricao = $_POST['descricao'];
+            $largura = $_POST['largura'];
+            $altura = $_POST['altura'];
+            $comprimento = $_POST['comprimento'];
+            $peso = $_POST['peso'];
+            $quantidade = $_POST['quantidade'];
+            $preco = Painel::formatarMoedaBd($_POST['preco']);
+            $categoria_id = $_POST['categoria_id'];
+            $cor_id = $_POST['cor_id'];
+            $imagem = $_FILES['imagem'];
 
-                $sucesso = true;
-                if ($_FILES['imagem']['name'][0] != '') {
-                    for ($i = 0; $i < $amountFiles; $i++) {
-                        $imagemAtual = [
-                            'type' => $_FILES['imagem']['type'][$i],
-                            'size' => $_FILES['imagem']['size'][$i]
-                        ];
-    
-                        if (Painel::imagemValida($imagemAtual) == false) {
-                            $sucesso = false;
-                            Painel::alert('erro', 'Uma das imagens selecionadas é invalida');
-                            break;
-                        }
-                    }
-                } else {
-                    $sucesso = false;
-                    Painel::alert('erro', 'Você precisa selecionar pelo menos uma imagem');
-                }
 
-                if($sucesso == true){
-                    for ($i = 0; $i < $amountFiles; $i++) {
-                        $imagemAtual = [
-                            'tmp_name' => $_FILES['imagem']['tmp_name'][$i],
-                            'name' => $_FILES['imagem']['name'][$i]
-                        ];
-                        $imagens[] = Painel::uploadFile($imagemAtual);
-                    }
-                    $sql = MySQL::conectar()->prepare("INSERT INTO `tb_produto.estoque` VALUES(null,?,?,?,?,?,?,?,?)");
-                    $sql->execute(array($nome,$descricao,$largura,$altura,$comprimento,$peso,$quantidade,$preco));
-                    $lastId = MySQL::conectar()->LastInsertId();
-                    foreach($imagens as $key => $value){
-                        $updateImagens = MySQL::conectar()->prepare("INSERT INTO `tb_produto.estoque_imagens` VALUES (null,?,?)");
-                        $updateImagens->execute([$lastId, $value]);
-                    }
-                    Painel::alert('sucesso','Produto cadastrado com sucesso');
-                }else{
-                    Painel::alert('erro', 'Não foi possivel cadastrar este produto. <br>Por favor tente novamente');
-                }
+
+
+            if (Painel::imagemValida($imagem) == false || $imagem == '') {
+                Painel::alert('erro', 'Imagem invalida');
+            } else {
+                $imagem = Painel::uploadFile($imagem);
+                $sql = MySql::conectar()->prepare("INSERT INTO `tb_produto.estoque` VALUES(null,?,?,?,?,?,?,?,?,?,?,?)");
+                $sql->execute(array($nome, $descricao, $largura, $altura, $comprimento, $peso, $quantidade, $preco, $categoria_id,$cor_id,$imagem));
+                
+                Painel::alert('sucesso', 'Produto cadastrado com sucesso');
             }
+        } // fazer testes
         ?>
         <div class="form-group">
-            <label >Nome do produto</label>
+            <label>Nome do produto</label>
             <input type="text" name="nome" placeholder="Camiseta preta">
         </div>
         <div class="form-group">
@@ -72,11 +52,24 @@
         </div>
         <div class="form-group">
             <label for="">Categoria:</label>
-            <select name="categorias">
-                <?php foreach($categoria as $key => $value){?>
-                    <option value=""><?php echo $value['nome']?></option>
+            <select name="categoria_id">
+                <?php foreach ($categoria as $key => $value) { ?>
+                    <option <?php if ($value['id'] == @$_POST['categoria_id']) echo 'selected'; ?> value="<?php echo $value['id']; ?>"><?php echo $value['nome'] ?></option>
                 <?php } ?>
-            <select>
+                <select>
+        </div>
+        <div class="form-group">
+            <label for="">Cor:</label>
+            
+            <select name="cor_id">
+                <?php foreach ($cor as $key => $value) { ?>   
+                    <option <?php if ($value['id'] == @$_POST['cor_id']) echo 'selected'; ?> value="<?php echo $value['id']; ?>"><?php echo $value['nome'] ?></option>
+                <?php } ?>
+                <select>
+                 
+                <!--<input type="checkbox" name="cor_id" value="<?php echo $value['id']?>">
+                <label style="display: inline; margin-right:8px;" for="<?php echo $value['id']?>"><?php echo $value['nome'];?></label>-->
+                
         </div>
         <div class="form-group">
             <label for="">Largura do produto:</label>
@@ -100,10 +93,10 @@
         </div>
         <div class="form-group">
             <label for="">Preço do produto:</label>
-            <input type="text" name="preco" >
+            <input type="text" name="preco">
         </div>
         <div class="form-group">
-            <input type="file" name="imagens[]" multiple>
+            <input type="file" name="imagem">
         </div>
 
         <div class="form-group">

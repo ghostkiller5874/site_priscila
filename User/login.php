@@ -30,7 +30,14 @@ if (isset($_COOKIE['lembrar'])) {
     <!-- ESTILIZAÇÃO -->
     <link rel="stylesheet" href="<?php echo INCLUDE_PATH_PERFIL; ?>css/style.css">
     <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>css/font-awesome.min.css">
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         html,
         body {
             background-color: rgba(253, 232, 233, 0.6);
@@ -46,6 +53,10 @@ if (isset($_COOKIE['lembrar'])) {
 
         .clear {
             clear: both;
+        }
+
+        .right {
+            float: right;
         }
 
         .container-header {
@@ -86,6 +97,52 @@ if (isset($_COOKIE['lembrar'])) {
         .header1 i {
             display: inline;
         }
+
+        .mobile-mod {
+            display: none;
+        }
+
+        @media screen and (max-width:425px) {
+            .header1 ul {
+                display: none;
+            }
+
+            .mobile-mod {
+                display: block;
+                width: 100%;
+            }
+
+            .botao-menu {
+                font-size: 22px;
+                color: white;
+                position: absolute;
+                top: 30px;
+                left: 90%;
+            }
+
+            .mobile-mod ul {
+                display: none;
+            }
+
+            .mobile-mod ul h4 {
+                text-align: center;
+                padding: 20px 0;
+                font-size: 15px;
+                background-color: white;
+                padding: 15px 0;
+            }
+
+            .mobile-mod ul h4:first-of-type {
+                border-bottom: 1px solid #f7acb0;
+            }
+
+        }
+        @media screen and (max-height: 710px) {
+            section .box-login{
+                position: absolute;
+                top: calc(50% + 50px);
+            }
+        }
     </style>
 
     <title>Project #1</title>
@@ -104,9 +161,24 @@ if (isset($_COOKIE['lembrar'])) {
                             <li><i class="fa fa-shopping-cart"></i> Carrinho</li>
                         </a>
                     </ul>
+
+                </div><!--HEADER1-->
+                <div class="mobile-mod right">
+                    <div class="botao-menu right"><i class="fa fa-bars"></i></div>
+                    <ul>
+                        <li><a href="<?php echo INCLUDE_PATH_PERFIL ?>">
+                                <h4><i class="fa fa-user"></i> Meu Perfil</h4>
+                            </a></li>
+                        <li><a href="<?php echo INCLUDE_PATH ?>carrinho">
+                                <h4><i class="fa fa-shopping-cart"></i> Carrinho</h4>
+                            </a></li>
+                    </ul>
+
                 </div>
+                <div class="clear"></div>
             </div>
         </div>
+
         <div class="clear"></div>
     </header>
     <?php
@@ -121,9 +193,9 @@ if (isset($_COOKIE['lembrar'])) {
                         <?php
                         if (isset($_POST['acao'])) {
                             $email = $_POST['email'];
-                            $senha = sha1($_POST['senha']);
-                            
-                            $sql = MySQL::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE email = ? AND senha = ?");
+                            $senha = $_POST['senha'];
+
+                            $sql = MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE email = ? AND senha = ?");
                             $sql->execute([$email, $senha]);
 
                             if ($sql->rowCount() == 1) {
@@ -132,6 +204,7 @@ if (isset($_COOKIE['lembrar'])) {
                                 $_SESSION['login'] = true;
                                 $_SESSION['email'] = $email;
                                 $_SESSION['senha'] = $senha;
+                                $_SESSION['identifica'] = $info['id'];
                                 $_SESSION['cargo'] = $info['cargo'];
                                 if (isset($_POST['lembrar'])) {
                                     setcookie('lembrar', true, time() + (60 * 60 * 24), '/');
@@ -144,16 +217,15 @@ if (isset($_COOKIE['lembrar'])) {
                                 //Falhou
                                 echo '<div class="erro-box"><i class="fa fa-times"></i> Usuário ou senha incorretos!</div>';
                             }
-                            
                         }
                         ?>
                         <div id="logar">
                             <h3>Bem-vindo Novamente: </h3>
                             <div class="form-group">
-                                <input type="email" name="email" placeholder="Digite seu e-mail...">
+                                <input type="email" name="email" placeholder="Digite seu e-mail..." required>
                             </div>
                             <div class="form-group">
-                                <input type="password" name="senha" placeholder="Digite sua senha...">
+                                <input type="password" name="senha" placeholder="Digite sua senha..." required>
                             </div>
 
                             <div class="form-group">
@@ -188,25 +260,25 @@ if (isset($_COOKIE['lembrar'])) {
                             $cpf = $_POST['cpf'];
                             $sexo = $_POST['sexo'];
                             $mail = $_POST['email'];
-                            $senha = sha1($_POST['senha']);
+                            $senha = $_POST['senha'];
                             $cargo = 1;
 
 
 
-                            $verificar = MySQL::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE email =?");
+                            $verificar = MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE email =?");
                             $verificar->execute([$_POST['email']]);
                             if ($verificar->rowCount() == 1) {
                                 Painel::alert('erro', 'Este email já foi registrado');
                             } else {
-                                $sql = MySQL::conectar()->prepare("INSERT INTO `tb_cliente` VALUES (null,?,?,?,?)");
+                                $sql = MySql::conectar()->prepare("INSERT INTO `tb_cliente` VALUES (null,?,?,?,?)");
                                 $tipoFinal = ($sexo == 'masculino') ? "Masculino" : "Feminino";
                                 $sql->execute([$nome, $telefone, $cpf, $tipoFinal]);
 
-                                $userID = MySQL::conectar()->lastInsertId();
-                                $sql = MySQL::conectar()->prepare("INSERT INTO `tb_usuario` VALUES (null,?,?,?,?)");
+                                $userID = MySql::conectar()->lastInsertId();
+                                $sql = MySql::conectar()->prepare("INSERT INTO `tb_usuario` VALUES (null,?,?,?,?)");
                                 $sql->execute(array($mail, $senha, $userID, $cargo));
 
-                                $logado = MySQL::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE email = ? AND senha = ?");
+                                $logado = MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE email = ? AND senha = ?");
                                 $logado->execute([$mail, $senha]);
                                 if ($logado->rowCount() == 1) {
                                     $info = $logado->fetch();
@@ -268,6 +340,25 @@ if (isset($_COOKIE['lembrar'])) {
     <script src="<?php echo INCLUDE_PATH ?>js/jquery.js"></script>
     <script src="<?php echo INCLUDE_PATH ?>js/jquery.mask.js"></script>
     <script src="<?php echo INCLUDE_PATH ?>js/helperMask.js"></script>
+    <script>
+        $('.mobile-mod  .botao-menu').click(function() {
+            //O que acontecera qndo clicar no botao menu
+            var listaMenu = $('.mobile-mod ul');
+
+
+            if (listaMenu.is(':hidden') == true) {
+                let icone = $('.botao-menu').find('i');
+                icone.removeClass('fa-bars');
+                icone.addClass('fa-times');
+                listaMenu.slideToggle();
+            } else {
+                let icone = $('.botao-menu').find('i');
+                icone.removeClass('fa-times');
+                icone.addClass('fa-bars');
+                listaMenu.slideToggle();
+            }
+        });
+    </script>
 </body>
 
 </html>

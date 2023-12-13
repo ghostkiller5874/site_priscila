@@ -7,6 +7,34 @@ class Painel
         '1'=>'Normal'
     ];
 
+    public static function listarUsuariosOnline(){
+        self::limparUsuariosOnline();
+        $sql = MySql::conectar()->prepare("SELECT * FROM `tb_admin.online`");
+        $sql->execute();
+        return $sql->fetchAll();
+    }
+    public static function limparUsuariosOnline(){
+        $date = date('Y-m-d H:i:s');
+        $sql = MySql::conectar()->exec("DELETE FROM `tb_admin.online` WHERE ultima_acao < '$date' - INTERVAL 1 MINUTE");
+    }
+
+    public static function carrinhoAdd($id,$qntd_id,$user){
+        $sql = MySql::conectar()->prepare("INSERT INTO `tb_carrinho` VALUES (null,?,?,?)");
+        $sql->execute([$id,$qntd_id,$user]);
+        Painel::redirect(INCLUDE_PATH.'carrinho');
+    }
+    public static function limparCart($item){
+        MySql::conectar()->exec("DELETE FROM `tb_carrinho` WHERE id=$item");
+        return false;
+    }
+    public static function finalizarCompra($nome,$categ,$cor,$valor,$idProduct,$idPag,$qntd,$cliente){
+        $sql = MySql::conectar()->prepare("INSERT INTO `tb_pedido` VALUES (null,?,?,?,?,?,?,?,?)");
+        $sql->execute([$nome,$categ,$cor,$valor,$idProduct,$idPag,$qntd,$cliente]);
+
+        MySql::conectar()->exec("UPDATE `tb_produto.estoque` SET quantidade=(quantidade-$qntd) WHERE id=$idProduct");
+        MySql::conectar()->exec("DELETE FROM `tb_carrinho` WHERE user_id=$cliente");
+        return false;
+    }
     public static function logado(){
         return isset($_SESSION['login']) ? true : false;
     }
@@ -79,7 +107,12 @@ class Painel
             }
         }else{
             //fazer um " if " para separar a " home " do ADM e do Usuario
-            include('pages/home.php');
+            if($_SESSION['cargo'] == 0){
+                include('pages/home.php');
+            }else{
+                include('pages/homeUser.php');
+            }
+            
         }
     }
 

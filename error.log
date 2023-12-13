@@ -1,36 +1,85 @@
-20/10/2023 14:36:55 = PDOException: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+07/12/2023 16:16:42 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
 Stack trace:
-#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
-#1 C:\xampp\htdocs\site_priscila\pages\login.php(29): MySQL::conectar()
-#2 C:\xampp\htdocs\site_priscila\index.php(54): include('C:\\xampp\\htdocs...')
-#3 {main}
-20/10/2023 15:49:02 = PDOException: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 16:16:59 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
 Stack trace:
-#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
-#1 C:\xampp\htdocs\site_priscila\pages\login.php(29): MySQL::conectar()
-#2 C:\xampp\htdocs\site_priscila\index.php(55): include('C:\\xampp\\htdocs...')
-#3 {main}
-13/11/2023 18:48:48 = PDOException: SQLSTATE[HY000] [1049] Unknown database 'projeto_tcc' in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 16:17:43 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
 Stack trace:
-#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
-#1 C:\xampp\htdocs\site_priscila\pages\carrinho.php(33): MySQL::conectar()
-#2 C:\xampp\htdocs\site_priscila\index.php(59): include('C:\\xampp\\htdocs...')
-#3 {main}
-13/11/2023 18:48:52 = PDOException: SQLSTATE[HY000] [1049] Unknown database 'projeto_tcc' in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(4): MySql::conectar()
+#2 {main}
+07/12/2023 16:17:48 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
 Stack trace:
-#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
-#1 C:\xampp\htdocs\site_priscila\pages\carrinho.php(33): MySQL::conectar()
-#2 C:\xampp\htdocs\site_priscila\index.php(59): include('C:\\xampp\\htdocs...')
-#3 {main}
-13/11/2023 18:48:54 = PDOException: SQLSTATE[HY000] [1049] Unknown database 'projeto_tcc' in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 16:18:56 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
 Stack trace:
-#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
-#1 C:\xampp\htdocs\site_priscila\pages\carrinho.php(33): MySQL::conectar()
-#2 C:\xampp\htdocs\site_priscila\index.php(59): include('C:\\xampp\\htdocs...')
-#3 {main}
-13/11/2023 18:48:58 = PDOException: SQLSTATE[HY000] [1049] Unknown database 'projeto_tcc' in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 16:42:30 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
 Stack trace:
-#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
-#1 C:\xampp\htdocs\site_priscila\pages\carrinho.php(33): MySQL::conectar()
-#2 C:\xampp\htdocs\site_priscila\index.php(59): include('C:\\xampp\\htdocs...')
-#3 {main}
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:07:04 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:07:14 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:07:16 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:07:17 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:07:18 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:07:18 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:07:19 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:07:24 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:12:47 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+07/12/2023 19:12:50 = PDOException: could not find driver in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('MySql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}
+09/12/2023 14:39:21 = PDOException: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente in C:\xampp\htdocs\site_priscila\classes\MySql.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
+#2 {main}

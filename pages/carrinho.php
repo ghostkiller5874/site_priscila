@@ -1,59 +1,173 @@
-<section>
-    <div class="center">
-        <div class="box-carrinho">
-            <div class="item-car w50 left">
-                <h4><i class="fa fa-shopping-basket"></i> Meu carrinho</h4>
-                <?php for($o=0;$o < 3;$o++){?>
-                <div class="content-item">
-                    <div class="imagem-item w50 left">
-                        <img src="<?php echo INCLUDE_PATH ?>images/pulseira.jpg" alt="">
-                    </div>
-                    <div class="sobre-item left">
-                       <h5><?php echo "Pulseira";?></h5>
-                       <h5><?php echo "Bijuteria";?></h5>
-                       <h5><?php echo "dourado";?></h5>
-                       <h5>Valor <b><?php echo "R$ 50,00"?></b></h5>
-                       <form action="" method="post">
-                        <select name="" id="">
-                            <?php 
-                            $qntd = 5;
-                            for($i=1;$i<=$qntd;$i++){?>
-                            <option value=""><?php echo $i;?></option>
-                            <?php }?>
-                        </select>
-                       </form>
-                       
-                    </div>
-                    <button>X</button>
-                    <div class="clear"></div>
-                </div>
-                <?php }?>
-                
-                <?php 
-                    $sql = MySQL::conectar()->prepare("SELECT * FROM `tb_usuario`");
-                    $sql->execute();
+<?php
+$carrinho = MySql::conectar()->prepare("SELECT * FROM `tb_carrinho`");
+$carrinho->execute();
 
-                    $info = $sql->fetch();
-                
-                ?>
+
+$usuario = MySql::conectar()->prepare("SELECT * FROM `tb_cliente` WHERE id=$_SESSION[identifica]");
+$usuario->execute();
+$usuario = $usuario->fetch();
+
+$endereco = MySql::conectar()->prepare("SELECT * FROM `tb_endereco` WHERE id=$usuario[endereco_id]");
+$endereco->execute();
+$endereco = $endereco->fetch();
+
+$pag = MySql::conectar()->prepare("SELECT * FROM `tb_modo.pagamento` WHERE id=$usuario[pag_id]");
+$pag->execute();
+$pag = $pag->fetch();
+
+//sessao
+$_SESSION['nome'] = $usuario['nome'];
+$_SESSION['cpf'] = $usuario['cpf'];
+@$_SESSION['endereco'] = $endereco['rua'];
+@$_SESSION['bairro'] = $endereco['bairro'];
+@$_SESSION['complemento'] = $endereco['logradouro'];
+@$_SESSION['cidade'] = $endereco['cidade'];
+@$_SESSION['estado'] = $endereco['estado'];
+$_SESSION['modoPagamento'] = $pag['tipo'];
+
+?>
+<?php
+if (@$_SESSION['login'] == true && @$_SESSION['identifica'] !=0) {
+?>
+    <section >
+
+        <div class="center">
+            <div class="box-carrinho">
+                <div class="item-car w50 left">
+                    <h4><i class="fa fa-shopping-basket"></i> Meu carrinho</h4>
+                    <?php
+                     if ($carrinho->rowCount() >= 1) { $carrinho = $carrinho->fetchAll();?>
+                    <?php
+                        $somaCart = 0;
+                        foreach ($carrinho as $key => $value) {
+
+                            $cartProduct = MySql::conectar()->prepare("SELECT * FROM `tb_produto.estoque` WHERE id=$value[compra_id]");
+                            $cartProduct->execute();
+                            $cartProduct = $cartProduct->fetch();
+
+                            $categ = MySql::conectar()->prepare("SELECT * FROM `tb_categoria` WHERE id=$cartProduct[categoria_id]");
+                            $categ->execute();
+                            $categ = $categ->fetch();
+
+                            $cor = MySql::conectar()->prepare("SELECT * FROM `tb_cor` WHERE id=$cartProduct[cor_id]");
+                            $cor->execute();
+                            $cor = $cor->fetch();
+
+
+                        ?>
+                            <form method="post" item_id="<?php echo $value['id'] ?>">
+                                <?php
+                                if (isset($_POST['limpar'])) {
+                                    $item = $value['id'];
+                                    $cart = $_POST['id_cart'];
+
+                                    if ($item == $cart) {
+                                        Painel::limparCart($item);
+                                    }
+                                    Painel::redirect(INCLUDE_PATH . 'carrinho');
+                                }
+                                ?>
+
+                                <div class="content-item" item_id="<?php echo $value['id']; ?>">
+
+                                    <div class="imagem-item w50 left">
+                                        <?php $imagens = ($cartProduct['imagem'] == '') ? INCLUDE_PATH . 'images/transferir.jpg' : INCLUDE_PATH_PERFIL . 'uploads/' . $cartProduct['imagem']; ?>
+                                        <img src="<?php echo $imagens ?>" alt="">
+                                    </div>
+                                    <div class="sobre-item left">
+                                        <h5><?php echo $cartProduct['nome'] ?></h5>
+                                        <h5>Categoria: <?php echo $categ['nome'] ?></h5>
+                                        <h5>Cor: <?php echo $cor['nome']; ?></h5>
+                                        <h5>Valor R$ <b><?php echo Painel::convertMoney($cartProduct['preco'])  ?></b></h5>
+                                        <h5>Quantidade: <b><?php echo $value['quantidade']; ?></b></h5>
+
+                                    </div>
+
+                                    <input type="hidden" name="id_cart" value="<?php echo $value['id']; ?>">
+                                    <input type="submit" name="limpar" value="X">
+
+                            </form>
+
+
+                            <div class="clear"></div>
+                        </div>
+
+                        <?php
+                            $nomeProduto = $cartProduct['nome'];
+                            $categoriaProduto = $cartProduct['categoria_id'];
+                            $corProduto = $cartProduct['cor_id'];
+                            $idProduto = $cartProduct['id'];
+                            $qntdItens = $value['quantidade'];
+                            $somaCart += $cartProduct['preco'] *  $value['quantidade'];
+                        } ?>
+        <?php } else { ?>
+            <h1 style="color:#ccc; text-align:center; margin: 50px 0;" ><i class="fa fa-shopping-cart" style="font-size: 38px;"></i> <br> Add ao Carrinho</h1>
+        <?php 
+            $somaCart = 0.00; 
+            $nomeProduto = ' ';
+            $categoriaProduto = 0;
+            $corProduto = 0;
+            $idProduto = 0;
+            $qntdItens = 0;
+
+
+            $button = 'display:none;';
+        } ?>
+
 
             </div>
             <div class="info-car w50 right">
+            <form  method="post">
+                <?php
+                $carrinho = MySql::conectar()->prepare("SELECT * FROM `tb_carrinho`");
+                $carrinho->execute();
+
+                if (isset($_POST['acao'])) {
+                    if($carrinho->rowCount() == 0){
+                        Painel::alert('erro','O Carrinho está Vázio.');
+                    }else{
+                        
+                        Painel::finalizarCompra($nomeProduto,$categoriaProduto,$corProduto,$somaCart,$idProduto,$_SESSION['modoPagamento'],$qntdItens,$_SESSION['identifica']);
+                        
+                        Painel::alert('sucesso','Compra realizada com sucesso');
+                        sleep(2);
+                        Painel::redirect(INCLUDE_PATH . 'carrinho');
+                    }
+                        
+                        
+                    
+                    
+                }
+                ?>
                 <h4>Resumo da Compra</h4>
                 <div class="info-resumo">
                     <ul>
-                        <li>Nome Cliente: <b><?php echo $info['email'];?></b></li>
-                        <li>Cpf: <b><?php echo "015.256.325-85";?></b></li>
-                        <li>Endereço: <b><?php echo "Rua josé lindo rego";?></b></li>
-                        <li>Metodo de Pagamento: <b><?php echo "Cartão de credito";?></b></li>
-                        <li>Valor <b><?php $val = 50*3;echo "R$ $val,00"?></b></li>
+                        <li>Nome Cliente: <b><?php echo $_SESSION['nome']; ?></b></li>
+                        <li>Cpf: <b><?php echo $_SESSION['cpf']; ?></b></li>
+                        <li>Endereço: <b><?php echo $_SESSION['endereco'] . ' ' . $_SESSION['complemento'] . ' - ' . $_SESSION['bairro'] . ' / ' . $_SESSION['cidade'] . ' - ' . $_SESSION['estado']; ?></b></li>
+                        <li>Metodo de Pagamento: <b><?php echo $_SESSION['modoPagamento']; ?></b></li>
+                        <li>Valor R$ <b><?php echo (Painel::convertMoney($somaCart) > 0) ? Painel::convertMoney($somaCart) : '0,00'; ?></b></li>
+
                     </ul>
                 </div>
-                <button>Finalizar Compra</button>
+                
+                    <input type="submit" name="acao" value="Finalizar Compra" >
+                </form>
+                
+                
                 <div class="clear"></div>
             </div>
 
             <div class="clear"></div>
         </div>
-    </div>
-</section>
+
+        </div>
+    </section>
+<?php } else { ?>
+    <section>
+        <div class="center">
+            <h2 style="text-align: center; margin:225px 0; text-transform: uppercase;">precisa estar logado para realizar a compra<br> <a style="color: #863E3F; border-bottom:1px solid #863E3F" href="<?php echo INCLUDE_PATH_PERFIL ?>">logue-se</a> antes</h2>
+
+        </div>
+    </section>
+<?php } ?>

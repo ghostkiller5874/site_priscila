@@ -1,6 +1,6 @@
 <?php
 
-class MySQL
+class MySql
 {
     private static $pdo;
     public static function conectar()

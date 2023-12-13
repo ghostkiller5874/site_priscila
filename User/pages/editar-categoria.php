@@ -2,7 +2,7 @@
 <?php
 if (isset($_GET['id'])) {
     $id = (int)$_GET['id'];
-    $categoria = MySQL::conectar()->prepare("SELECT * FROM `tb_categoria` WHERE id=?");
+    $categoria = MySql::conectar()->prepare("SELECT * FROM `tb_categoria` WHERE id=?");
     $categoria->execute([$id]);
     $categoria = $categoria->fetch();
 } else {
@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
             if ($nome == '') {
                 Painel::alert('erro', 'Campos vázios não são permitidos');
             } else {
-                $verificar = MySQL::conectar()->prepare("SELECT * FROM `tb_categoria` WHERE nome =?");
+                $verificar = MySql::conectar()->prepare("SELECT * FROM `tb_categoria` WHERE nome =?");
                 $verificar->execute([$_POST['nome']]);
                 if ($verificar->rowCount() == 1) {
                     Painel::alert('erro', 'Já existe uma categoria com este nome');
@@ -32,12 +32,12 @@ if (isset($_GET['id'])) {
                     if(Painel::imagemValida($imagem) == true || $imagem != ''){
                         Painel::deleteFile($imagemAtual);
                         $imagem = Painel::uploadFile($imagem);
-                        $sql = MySQL::conectar()->prepare("UPDATE `tb_categoria` SET nome = ?,slug=?, imagem=? WHERE id =$id");
+                        $sql = MySql::conectar()->prepare("UPDATE `tb_categoria` SET nome = ?,slug=?, imagem=? WHERE id =$id");
                         $sql->execute([$nome, $slug,$imagem]);
                         Painel::alert('sucesso', 'Categoria atualizada com sucesso');
 
                     }else if(Painel::imagemValida($imagem) == false || $imagem == ''){
-                        $sql = MySQL::conectar()->prepare("UPDATE `tb_categoria` SET nome = ?,slug=? WHERE id =$id");
+                        $sql = MySql::conectar()->prepare("UPDATE `tb_categoria` SET nome = ?,slug=? WHERE id =$id");
                         $sql->execute([$nome, $slug]);
                         Painel::alert('sucesso', 'Categoria atualizada com sucesso');
                     }else{
@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
                     
                 }
             }
-            $categoria = MySQL::conectar()->prepare("SELECT * FROM `tb_categoria` WHERE id=?");
+            $categoria = MySql::conectar()->prepare("SELECT * FROM `tb_categoria` WHERE id=?");
             $categoria->execute([$id]);
             $categoria = $categoria->fetch();
         }

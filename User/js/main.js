@@ -10,7 +10,10 @@ $('[actionBtn=delete]').click(function () {
 
 $('.box-alert').fadeIn('.sucesso', setTimeout(function () {
     $('.sucesso').fadeOut();
-}, 2000));
+}, 3000));
 $('.box-alert').fadeIn('.erro', setTimeout(function () {
     $('.erro').fadeOut();
-}, 4000));
+}, 5000));
+
+
+

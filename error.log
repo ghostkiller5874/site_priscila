@@ -83,3 +83,15 @@ Stack trace:
 #0 C:\xampp\htdocs\site_priscila\classes\MySql.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
 #1 C:\xampp\htdocs\site_priscila\index.php(3): MySql::conectar()
 #2 {main}
+18/05/2025 01:27:27 = PDOException: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\classes\Site.php(11): MySql::conectar()
+#2 C:\xampp\htdocs\site_priscila\index.php(2): Site::updateUsuarioOnline()
+#3 {main}
+18/05/2025 01:27:43 = PDOException: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\classes\Site.php(11): MySql::conectar()
+#2 C:\xampp\htdocs\site_priscila\index.php(2): Site::updateUsuarioOnline()
+#3 {main}

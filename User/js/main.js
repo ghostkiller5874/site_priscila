@@ -14,6 +14,9 @@ $('.box-alert').fadeIn('.sucesso', setTimeout(function () {
 $('.box-alert').fadeIn('.erro', setTimeout(function () {
     $('.erro').fadeOut();
 }, 5000));
+$('.box-alert').fadeIn('.atencao', setTimeout(function () {
+    $('.atencao').fadeOut();
+}, 5000));
 
 
 

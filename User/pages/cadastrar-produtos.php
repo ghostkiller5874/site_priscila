@@ -39,22 +39,23 @@ $cor = $cor->fetchAll();
                 $sql->execute(array($nome, $descricao, $largura, $altura, $comprimento, $peso, $quantidade, $preco, $categoria_id,$cor_id,$imagem));
                 
                 Painel::alert('sucesso', 'Produto cadastrado com sucesso');
+                Painel::redirect(INCLUDE_PATH_PERFIL.'cadastrar-produtos');
             }
         } // fazer testes
         ?>
         <div class="form-group">
             <label>Nome do produto</label>
-            <input type="text" name="nome" placeholder="Camiseta preta">
+            <input type="text" name="nome" placeholder="Camiseta preta" value="<?=($_POST['nome'] ?? "");?>">
         </div>
         <div class="form-group">
             <label for="">Descrição do Produto</label>
-            <textarea name="descricao" style="resize: vertical;" placeholder="Camiseta preta manga longa slim"></textarea>
+            <textarea name="descricao" style="resize: vertical;" placeholder="Camiseta preta manga longa slim"><?=($_POST['descricao'] ?? "");?></textarea>
         </div>
         <div class="form-group">
             <label for="">Categoria:</label>
             <select name="categoria_id">
                 <?php foreach ($categoria as $key => $value) { ?>
-                    <option <?php if ($value['id'] == @$_POST['categoria_id']) echo 'selected'; ?> value="<?php echo $value['id']; ?>"><?php echo $value['nome'] ?></option>
+                    <option <?php if ($value['id'] == @$_POST['categoria_id']) echo 'selected'; ?> value="<?php echo $value['id']; ?>"><?php echo ($value['nome'] ?? "") ?></option>
                 <?php } ?>
                 <select>
         </div>
@@ -63,7 +64,7 @@ $cor = $cor->fetchAll();
             
             <select name="cor_id">
                 <?php foreach ($cor as $key => $value) { ?>   
-                    <option <?php if ($value['id'] == @$_POST['cor_id']) echo 'selected'; ?> value="<?php echo $value['id']; ?>"><?php echo $value['nome'] ?></option>
+                    <option <?php if ($value['id'] == @$_POST['cor_id']) echo 'selected'; ?> value="<?php echo $value['id']; ?>"><?php echo ($value['nome_cor'] ?? "") ?></option>
                 <?php } ?>
                 <select>
                  
@@ -73,27 +74,27 @@ $cor = $cor->fetchAll();
         </div>
         <div class="form-group">
             <label for="">Largura do produto:</label>
-            <input type="number" name="largura" min="0" max="900" step="5" value="0">
+            <input type="number" name="largura" min="0" max="900" step="5" value="<?=($_POST['largura'] ?? 0);?>" >
         </div>
         <div class="form-group">
             <label for="">Altura do produto:</label>
-            <input type="number" name="altura" min="0" max="900" step="5" value="0">
+            <input type="number" name="altura" min="0" max="900" step="5" value="<?=($_POST['altura'] ?? 0);?>">
         </div>
         <div class="form-group">
             <label for="">Comprimento do produto:</label>
-            <input type="number" name="comprimento" min="0" max="900" step="5" value="0">
+            <input type="number" name="comprimento" min="0" max="900" step="5" value="<?=($_POST['comprimento'] ?? 0);?>" >
         </div>
         <div class="form-group">
             <label for="">Peso do produto:</label>
-            <input type="number" name="peso" min="0" max="900" step="5" value="0">
+            <input type="number" name="peso" min="0" max="900" step="5" value="<?=($_POST['peso'] ?? 0);?>" >
         </div>
         <div class="form-group">
             <label for="">Quantidade do produto:</label>
-            <input type="number" name="quantidade" min="0" max="900" step="5" value="0">
+            <input type="number" name="quantidade" min="0" max="900" step="5" value="<?=($_POST['quantidade'] ?? 0);?>" >
         </div>
         <div class="form-group">
             <label for="">Preço do produto:</label>
-            <input type="text" name="preco">
+            <input type="text" name="preco" value="<?=($_POST['preco'] ?? "");?>">
         </div>
         <div class="form-group">
             <input type="file" name="imagem">

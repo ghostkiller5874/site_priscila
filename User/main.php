@@ -16,7 +16,7 @@
     <link rel="icon" href="<?php echo INCLUDE_PATH?>favicon.ico" type="image/x-icon">
 
 
-    <title>Area de Peril</title>
+    <title>Area de Perfil</title>
 </head>
 
 <body>

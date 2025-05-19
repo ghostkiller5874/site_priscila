@@ -21,19 +21,19 @@
     <div class="box-metricas">
         <div class="box-metrica-single">
             <h3>Usuários Online</h3>
-            <h4><?php echo count($usuariosOnline);?></h4>            
+            <h4><?= count($usuariosOnline);?></h4>            
         </div>
         <div class="box-metrica-single">
             <h3>Total de Visitas</h3>
-            <h4><?php echo $pegarVisitasTotais;?></h4>
+            <h4><?= $pegarVisitasTotais;?></h4>
         </div>
         <div class="box-metrica-single">
             <h3>Visitas Hoje</h3>
-            <h4><?php echo $pegarVisitasHoje;?></h4>
+            <h4><?= $pegarVisitasHoje;?></h4>
         </div>
         <div class="box-metrica-single">
             <h3>Vendas Feitas</h3>
-            <h4><?php echo count($vendas)?></h4>
+            <h4><?= count($vendas)?></h4>
         </div>
         <div class="clear"></div>
     </div>
@@ -51,8 +51,8 @@
             foreach($usuariosOnline as $key => $value){
         ?>
         <div class="row">
-            <div class="col"><span><?php echo $value['ip']?></span></div>
-            <div class="col"><span><?php echo date('d/m/Y H:i:s',strtotime($value['ultima_acao']));?></span></div>
+            <div class="col"><span><?= $value['ip']?></span></div>
+            <div class="col"><span><?= date('d/m/Y H:i:s',strtotime($value['ultima_acao']));?></span></div>
             <div class="clear"></div>
         </div><!--ROW-->
         <?php }?>
@@ -60,28 +60,32 @@
 </section><!--content-->
 
 <section class="box-content">
-    <h2><i class="fa fa-handshake-o"></i> Vendas Realizadas: <?php echo count($vendas)?></h2>
+    <h2><i class="fa fa-handshake-o"></i> Vendas Realizadas: <?= count($vendas)?></h2>
     <div class="pedido-box">
         <?php 
             foreach($vendas as $key => $value){
             $produto = MySql::conectar()->prepare("SELECT * FROM `tb_produto.estoque` WHERE id=$value[produto_id]");
             $produto->execute();
             $produto = $produto->fetch();
+
+            $modoPag = MySql::conectar()->prepare("SELECT tipo FROM `tb_modo.pagamento` WHERE id=$value[modo_pag]");
+            $modoPag->execute();
+            $modoPag = $modoPag->fetch();
             
         ?>
         <div class="pedido-wrapper w33" style="margin: 10px;">
             <div class="pedido-single">
                 <?php if($produto['imagem'] != ''){?>
-                    <img src="<?php echo INCLUDE_PATH_PERFIL?>uploads/<?php echo $produto['imagem']?>" alt="">
+                    <img src="<?= INCLUDE_PATH_PERFIL?>uploads/<?= $produto['imagem']?>" alt="">
                 <?php }else{?>
-                    <img src="<?php echo INCLUDE_PATH?>images/transferir.jpg" alt="">
+                    <img src="<?= INCLUDE_PATH?>images/transferir.jpg" alt="">
                 <?php }?>
                 <ul>
-                    <li><i class="fa fa-info"></i><h4> <?php echo $value['nome']?></h4></li>
-                    <li><i class="fa fa-info"></i><h4> Descricao:</h4> <?php echo substr($produto['descricao'],0,50)?> </li>
-                    <li><i class="fa fa-info"></i><h4> Preço: R$</h4> <?php echo Painel::convertMoney($value['valor'])?></li>
-                    <li><i class="fa fa-info"></i><h4> Quantidade: </h4> <?php echo $value['quantidade']?> </li>
-                    <li><i class="fa fa-info"></i><h4> Modo de Pagamento: </h4> <?php echo $value['pag_tipo']?> </li>
+                    <li><i class="fa fa-info"></i><h4> <?= $value['nome_produto']?></h4></li>
+                    <li><i class="fa fa-info"></i><h4> Descricao:</h4> <?= substr($produto['descricao'],0,50)?> </li>
+                    <li><i class="fa fa-info"></i><h4> Preço: R$</h4> <?= Painel::convertMoney($value['soma_cart'])?></li>
+                    <li><i class="fa fa-info"></i><h4> Quantidade: </h4> <?= $value['quantidade']?> </li>
+                    <li><i class="fa fa-info"></i><h4> Modo de Pagamento: </h4> <?= $modoPag['tipo'];?> </li>
                 </ul>
             </div>
             

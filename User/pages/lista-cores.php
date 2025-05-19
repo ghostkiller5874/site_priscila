@@ -36,7 +36,7 @@ $cor = $sql->fetchAll();
 
                 ?>
                     <tr>
-                        <td><?php echo $value['nome']; ?></td>
+                        <td><?php echo $value['nome_cor']; ?></td>
                         <td><a class="btn delete" href="<?php echo INCLUDE_PATH_PERFIL ?>lista-cores?excluir=<?php echo $value['id']; ?>" ><i class="fa fa-times"></i> Excluir</a></td>
                         <td><a href="<?php echo INCLUDE_PATH_PERFIL ?>editar-cor?id=<?php echo $value['id']; ?>" class="btn edit"><i class="fa fa-pencil"></i> Editar</a></td>
 

@@ -2,7 +2,7 @@
 session_start();
 date_default_timezone_set('America/Sao_Paulo');
 $autoload = function ($class) {
-    include('classes/' . $class . '.php');
+    require('classes/' . $class . '.php');
 };
 
 spl_autoload_register($autoload);
@@ -21,12 +21,16 @@ define('PASSWORD', '');
 
 
 //FUNCOES DO PAINEL 
-function selecionadoMenu($par){
+function selecionadoMenu(string $par){
     /*<i class="fa fa-angle-double-right" aria-hidden="true"></i>*/
-    $url = explode('/',@$_GET['url'])[0];
-    if($url == $par){
-        echo 'class="active"';
+    $url = explode('/',@$_GET['url'] ?? "")[0];
+    if($url != $par){
+        echo "class=''";
+    }else{
+        echo "class='active'";
     }
+    // var_dump($url);
+    
 }
 
 function verificaPermissaoMenu($permissao){

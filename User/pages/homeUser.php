@@ -18,9 +18,9 @@
             <img src="<?php echo INCLUDE_PATH_PERFIL?>uploads/<?php echo $produto['imagem']?>" alt="">
            
             <ul>
-               <li><i class="fa fa-info"></i><h4> <?php echo $value['nome']?></h4></li>
+               <li><i class="fa fa-info"></i><h4> <?php echo $value['nome_produto']?></h4></li>
                <li><i class="fa fa-info"></i><h4> Descricao:</h4> <?php echo substr($produto['descricao'],0,50)?> </li>
-               <li><i class="fa fa-info"></i><h4> Preço: R$</h4> <?php echo Painel::convertMoney($value['valor'])?></li>
+               <li><i class="fa fa-info"></i><h4> Preço: R$</h4> <?php echo Painel::convertMoney($value['soma_cart'])?></li>
             </ul>
             
          </div>

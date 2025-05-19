@@ -96,7 +96,7 @@ if (isset($_GET['categoria']) && $_GET['categoria'] != '') {
                     $cor->execute();
                     $cor = $cor->fetch();
                     ?>
-                    <p style="margin-bottom: 8px;">Cor: <b><?php echo $cor['nome']; ?></b></p>
+                    <p style="margin-bottom: 8px;">Cor: <b><?php echo $cor['nome_cor']; ?></b></p>
 
 
                     <a class="comprar" href="<?php echo INCLUDE_PATH ?>produto?id=<?php echo $value['id']; ?>">Comprar</a>

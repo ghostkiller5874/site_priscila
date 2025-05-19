@@ -270,13 +270,17 @@ if (isset($_COOKIE['lembrar'])) {
                             if ($verificar->rowCount() == 1) {
                                 Painel::alert('erro', 'Este email já foi registrado');
                             } else {
-                                $sql = MySql::conectar()->prepare("INSERT INTO `tb_cliente` VALUES (null,?,?,?,?)");
+                                $sql_cliente = MySql::conectar()->prepare("INSERT INTO `tb_cliente` VALUES (null,?,?,?,?,?,?)");
                                 $tipoFinal = ($sexo == 'masculino') ? "Masculino" : "Feminino";
-                                $sql->execute([$nome, $telefone, $cpf, $tipoFinal]);
+                                $sql_cliente->execute([$nome, $telefone, $cpf, $tipoFinal,null,1]);
 
                                 $userID = MySql::conectar()->lastInsertId();
-                                $sql = MySql::conectar()->prepare("INSERT INTO `tb_usuario` VALUES (null,?,?,?,?)");
-                                $sql->execute(array($mail, $senha, $userID, $cargo));
+                                var_dump($userID);
+                                $sql_usuario = MySql::conectar()->prepare("INSERT INTO `tb_usuario` VALUES (null,?,?,?,?)");
+                                
+                                $sql_usuario->execute(array($mail, $senha, $cargo, $userID));
+
+                                $_SESSION['identifica'] = $userID;
 
                                 $logado = MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE email = ? AND senha = ?");
                                 $logado->execute([$mail, $senha]);
@@ -287,6 +291,7 @@ if (isset($_COOKIE['lembrar'])) {
                                     $_SESSION['email'] = $mail;
                                     $_SESSION['senha'] = $senha;
                                     $_SESSION['cargo'] = $info['cargo'];
+                                    $_SESSION['identifica'] = $userID;
                                     if (isset($_POST['lembrar'])) {
                                         setcookie('lembrar', true, time() + (60 * 60 * 24), '/');
                                         setcookie('email', $email, time() + (60 * 60 * 24), '/');

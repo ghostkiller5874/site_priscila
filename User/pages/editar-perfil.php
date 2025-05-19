@@ -1,9 +1,10 @@
 <?php 
 
+   
     $perfil = MySql::conectar()->prepare("SELECT * FROM `tb_cliente` WHERE id=$_SESSION[identifica]");
     $perfil->execute();
     $perfil = $perfil->fetch();
-
+   
     $endereco = MySql::conectar()->prepare("SELECT * FROM `tb_endereco` WHERE id=?");
     $endereco->execute([$perfil['endereco_id']]);
     $endereco = $endereco->fetch();
@@ -12,11 +13,11 @@
     $pag->execute();
     $pag = $pag->fetchAll();
 
-    $user = MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE user_id=?");
+    $user = MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE user_id=? AND cargo <> 0");
     $user->execute([$perfil['id']]);
     $user = $user->fetch();
 
-    $userADM= MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE user_id=0");
+    $userADM= MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE user_id=0 || cargo=0");
     $userADM->execute();
     $userADM = $userADM->fetch();
 ?>
@@ -25,7 +26,7 @@
         //trocoar dps para apenas usuario comum
 ?>
 <section class="box-content">
-    <h2><i class="fa fa-pencil"></i> Editando as informações do <b><?php echo $perfil['nome']?></b></h2>
+    <h2><i class="fa fa-pencil"></i> Editando as informações do <b><?= $perfil['nome']?></b></h2>
 
     <form  method="post" enctype="multipart/form-data">
         <?php 
@@ -46,7 +47,7 @@
                 $estado = $_POST['estado'];
                 //pagamento
                 $modoPag = $_POST['pag_id'];
-
+                
                 //verificar existencia de algumas informações
 
                 $verifica = MySql::conectar()->prepare("SELECT * FROM `tb_endereco` WHERE id=?");
@@ -70,29 +71,29 @@
         ?>
         <div class="form-group">
             <label>Nome Completo:</label>
-            <input type="text" name="nome" value="<?php echo $perfil['nome'];?>">
+            <input type="text" name="nome" value="<?= ($perfil['nome'] ?? "");?>">
         </div>
         <div class="form-group">
             <label>Telefone:</label>
-            <input type="text" name="telefone" value="<?php echo $perfil['telefone'];?>">
+            <input type="text" name="telefone" value="<?= ($perfil['telefone'] ?? "");?>">
         </div>
         <div class="form-group">
             <label>CPF:</label>
-            <input type="text" name="cpf" value="<?php echo $perfil['cpf'];?>">
+            <input type="text" name="cpf" value="<?= ($perfil['cpf'] ?? "");?>">
         </div>
         <div class="form-group">
             <label>Sexo:</label>
             <select name="sexo" >
-                <option value="" ><?php echo $perfil['sexo']?></option>
-                <option value="" ><?php echo "Feminino";?></option>
+                <option value="" ><?= $perfil['sexo']?></option>
+                <option value="" ><?= "Feminino";?></option>
             </select>
         </div>
         <div class="form-group">
             <h4>Dados de Usuário</h4>
             <label>Email:</label>
-            <input type="text" name="email" value="<?php echo $user['email']; ?>">
+            <input type="text" name="email" value="<?= ($user['email'] ?? ""); ?>">
             <label>Senha:</label>
-            <input type="text" name="senha" value="<?php echo $user['senha']; ?>">
+            <input type="text" name="senha" value="<?= ($user['senha'] ?? ""); ?>">
         </div>
         <div class="form-group">
             <h4>Endereço</h4>
@@ -102,15 +103,15 @@
                 if($verificaEndereco->rowCount() == 1){
             ?>
             <label >Cidade:</label>
-            <input type="text" name="cidade" value="<?php echo $endereco['cidade'];?>">
+            <input type="text" name="cidade" value="<?= ($endereco['cidade'] ?? "");?>">
             <label>Rua:</label>
-            <input type="text" name="rua" value="<?php echo $endereco['rua']; ?>">
+            <input type="text" name="rua" value="<?= ($endereco['rua'] ?? ""); ?>">
             <label>Bairro:</label>
-            <input type="text" name="bairro" value="<?php echo $endereco['bairro'];?>">
+            <input type="text" name="bairro" value="<?= ($endereco['bairro'] ?? "");?>">
             <label>Logradouro:</label>
-            <input type="text" name="logradouro" value="<?php echo $endereco['logradouro'];?>">
+            <input type="text" name="logradouro" value="<?= ($endereco['logradouro'] ?? "");?>">
             <label>Estado:</label>
-            <input type="text" name="estado" value="<?php echo $endereco['estado']?>">
+            <input type="text" name="estado" value="<?= ($endereco['estado'] ?? "")?>">
             <?php }else{?>
             <label >Cidade:</label>
             <input type="text" name="cidade">
@@ -128,8 +129,8 @@
         <div class="form-group">
             <h4 style="margin-bottom: 8px;">Metodo de Pagamento: </h4>
             <?php foreach($pag as $key => $value){?>
-                <input  type="radio" name="pag_id" value="<?php echo $value['id']?>" <?php if ($value['id'] == $perfil['pag_id']) echo 'checked'; ?>>
-                <label style="display: inline; margin-right:8px;" for="<?php echo $value['id']?>"><?php echo $value['tipo'];?></label>
+                <input  type="radio" name="pag_id" value="<?= $value['id']?>" <?php if ($value['id'] == $perfil['pag_id']) echo 'checked'; ?>>
+                <label style="display: inline; margin-right:8px;" for="<?= $value['id']?>"><?= $value['tipo'];?></label>
             <?php }?>
             
         </div>
@@ -151,10 +152,10 @@
                     if($email == '' || $senha == ''){
                         Painel::alert('erro', 'Campos vazios não são permitidos');
                     }else{
-                        $sql = MySql::conectar()->prepare("UPDATE `tb_usuario` SET email=?,senha=? WHERE user_id = 0");
+                        $sql = MySql::conectar()->prepare("UPDATE `tb_usuario` SET email=?,senha=? WHERE cargo = 0 AND id=$_SESSION[identifica]");
                         $sql->execute([$email,$senha]);
                         Painel::alert('sucesso','ADM atualizado com sucesso');
-                        $userADM = MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE user_id=0");
+                        $userADM = MySql::conectar()->prepare("SELECT * FROM `tb_usuario` WHERE cargo=0");
                         $userADM->execute();
                         $userADM = $userADM->fetch();
                     }
@@ -162,11 +163,11 @@
             ?>
             <div class="form-group">
                 <label>Email:</label>
-                <input type="text" name="email_adm" value="<?php echo $userADM['email'];?>">
+                <input type="text" name="email_adm" value="<?= $userADM['email'];?>">
             </div>
             <div class="form-group">
                 <label>Senha:</label>
-                <input type="text" name="senha_adm" value="<?php echo $userADM['senha']?>">
+                <input type="text" name="senha_adm" value="<?= $userADM['senha']?>">
             </div>
             <div class="form-group">
                 <input type="submit" value="Atualizar" name="Atualizar_adm">

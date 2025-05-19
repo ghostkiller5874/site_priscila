@@ -40,14 +40,14 @@
                             $cor->execute();
                             $cor = $cor->fetch();
                         ?>
-                            <p style="margin-bottom: 8px;">Cor: <b><?php echo $cor['nome']; ?></b></p>
+                            <p style="margin-bottom: 8px;">Cor: <b><?php echo $cor['nome_cor']; ?></b></p>
                             
                         </div>
                         <div class="form-group">
                             <label for="">Quantidade:</label>
                             <select name="qntd_id" id="">
                                 <?php for($i=1; $i <= $produto['quantidade']; $i++){?>
-                                <option value="<?php echo $i;?>"><?php echo $i?></option>
+                                <option value="<?= $i;?>"><?= $i?></option>
                                 <?php }?>
                             </select>
                             
@@ -70,7 +70,7 @@
             
             <div class="produto-descricao">
                 <h3>Descrição do Produto</h3>
-                <p><?php echo $produto['descricao'];?></p>
+                <p><?= $produto['descricao'];?></p>
             </div>
         </div>
     </div>

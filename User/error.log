@@ -1,0 +1,8 @@
+18/05/2025 15:38:30 = PDOException: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO) in C:\xampp\htdocs\site_priscila\classes\MySQL.php:10
+Stack trace:
+#0 C:\xampp\htdocs\site_priscila\classes\MySQL.php(10): PDO->__construct('mysql:host=loca...', '', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\site_priscila\User\pages\cadastrar-categoria.php(15): MySql::conectar()
+#2 C:\xampp\htdocs\site_priscila\classes\Painel.php(103): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\site_priscila\User\main.php(125): Painel::carregarPagina()
+#4 C:\xampp\htdocs\site_priscila\User\index.php(8): include('C:\\xampp\\htdocs...')
+#5 {main}
